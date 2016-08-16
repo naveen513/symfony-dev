@@ -8,71 +8,69 @@ use Doctrine\ORM\Mapping as ORM;
  * Url
  *
  * @ORM\Table(name="url")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UrlRepository")
+ * @ORM\Entity
  */
 class Url
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="domain", type="string", length=255)
+     * @ORM\Column(name="domain", type="string", length=255, nullable=false)
      */
     private $domain;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="url", type="string", length=255)
+     * @ORM\Column(name="url", type="string", length=255, nullable=false)
      */
     private $url;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="status", type="string", length=255)
+     * @ORM\Column(name="status", type="string", length=255, nullable=true)
      */
     private $status;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="body", type="text")
+     * @ORM\Column(name="description", type="text", length=65535, nullable=false)
      */
-    private $body;
+    private $description;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_on", type="datetimetz", nullable=true)
+     * @ORM\Column(name="created_on", type="datetime", nullable=true)
      */
-    private $createdOn;
-
+    private $createdOn = 'CURRENT_TIMESTAMP';
 
     /**
-     * Get id
+     * @var \DateTime
      *
-     * @return int
+     * @ORM\Column(name="updated_on", type="datetime", nullable=true)
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $updatedOn = 'CURRENT_TIMESTAMP';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
 
     /**
      * Set title
@@ -149,7 +147,7 @@ class Url
     /**
      * Set status
      *
-     * @param integer $status
+     * @param string $status
      *
      * @return Url
      */
@@ -163,7 +161,7 @@ class Url
     /**
      * Get status
      *
-     * @return int
+     * @return string
      */
     public function getStatus()
     {
@@ -171,27 +169,27 @@ class Url
     }
 
     /**
-     * Set body
+     * Set description
      *
-     * @param string $body
+     * @param string $description
      *
      * @return Url
      */
-    public function setBody($body)
+    public function setDescription($description)
     {
-        $this->body = $body;
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * Get body
+     * Get description
      *
      * @return string
      */
-    public function getBody()
+    public function getDescription()
     {
-        return $this->body;
+        return $this->description;
     }
 
     /**
@@ -216,5 +214,39 @@ class Url
     public function getCreatedOn()
     {
         return $this->createdOn;
+    }
+
+    /**
+     * Set updatedOn
+     *
+     * @param \DateTime $updatedOn
+     *
+     * @return Url
+     */
+    public function setUpdatedOn($updatedOn)
+    {
+        $this->updatedOn = $updatedOn;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedOn
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedOn()
+    {
+        return $this->updatedOn;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }

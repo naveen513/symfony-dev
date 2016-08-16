@@ -6,6 +6,18 @@
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
+    <script>
+        function checkUrl(){
+            $.ajax({
+                url: "test",
+                data: { url: $("#form_url").val()},
+                success: function(data, textStatus, xhr){
+                    $("#form_status").val(data.status);
+                    console.log(data);
+                }
+            });
+        }
+    </script>
 {% endblock %}
 
 
