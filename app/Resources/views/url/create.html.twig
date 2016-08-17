@@ -10,12 +10,28 @@
         function checkUrl(){
             $.ajax({
                 url: "test",
-                data: { url: $("#form_url").val()},
+                type: "POST",
+                data: { url: $('#url_form_url').val()},
                 success: function(data, textStatus, xhr){
-                    $("#form_status").val(data.status);
-                    console.log(data);
+                    $("#url_form_status").val(data.status);
+
+                    if(inArray(data.status,['200','201'])) {
+                        $("#url_form_statusDesc").val("Valid ("+data.status+")");
+                    } else {
+                        $("#url_form_statusDesc").val("Not Valid ("+data.status+")");
+                    }
                 }
             });
+        }
+
+        function inArray(needle, haystack) {
+            var length = haystack.length
+
+            for(var i = 0; i < length; i++) {
+                if(haystack[i] == needle) return true;
+            }
+
+            return false;
         }
     </script>
 {% endblock %}

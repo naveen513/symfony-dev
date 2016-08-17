@@ -2,75 +2,61 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Url
- *
- * @ORM\Table(name="url")
- * @ORM\Entity
  */
 class Url
 {
     /**
+     * @var int
+     */
+    private $id;
+
+    /**
      * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
     private $title;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="domain", type="string", length=255, nullable=false)
      */
     private $domain;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="url", type="string", length=255, nullable=false)
      */
     private $url;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="status", type="string", length=255, nullable=true)
+     * @var int
      */
     private $status;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="description", type="text", length=65535, nullable=false)
      */
     private $description;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="created_on", type="datetime", nullable=true)
      */
-    private $createdOn = 'CURRENT_TIMESTAMP';
+    private $createdAt;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="updated_on", type="datetime", nullable=true)
      */
-    private $updatedOn = 'CURRENT_TIMESTAMP';
+    private $updatedAt;
+
 
     /**
-     * @var integer
+     * Get id
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return int
      */
-    private $id;
-
-
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set title
@@ -147,7 +133,7 @@ class Url
     /**
      * Set status
      *
-     * @param string $status
+     * @param integer $status
      *
      * @return Url
      */
@@ -161,7 +147,7 @@ class Url
     /**
      * Get status
      *
-     * @return string
+     * @return int
      */
     public function getStatus()
     {
@@ -193,60 +179,51 @@ class Url
     }
 
     /**
-     * Set createdOn
+     * Set createdAt
      *
-     * @param \DateTime $createdOn
+     * @param \DateTime $createdAt
      *
      * @return Url
      */
-    public function setCreatedOn($createdOn)
+    public function setCreatedAt($createdAt)
     {
-        $this->createdOn = $createdOn;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     /**
-     * Get createdOn
+     * Get createdAt
      *
      * @return \DateTime
      */
-    public function getCreatedOn()
+    public function getCreatedAt()
     {
-        return $this->createdOn;
+        return $this->createdAt;
     }
 
     /**
-     * Set updatedOn
+     * Set updatedAt
      *
-     * @param \DateTime $updatedOn
+     * @param \DateTime $updatedAt
      *
      * @return Url
      */
-    public function setUpdatedOn($updatedOn)
+    public function setUpdatedAt($updatedAt)
     {
-        $this->updatedOn = $updatedOn;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
     /**
-     * Get updatedOn
+     * Get updatedAt
      *
      * @return \DateTime
      */
-    public function getUpdatedOn()
+    public function getUpdatedAt()
     {
-        return $this->updatedOn;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this->updatedAt;
     }
 }
+

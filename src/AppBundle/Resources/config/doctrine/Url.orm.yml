@@ -1,0 +1,32 @@
+AppBundle\Entity\Url:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\UrlRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: '255'
+        domain:
+            type: string
+            length: 255
+        url:
+            type: string
+            length: 255
+        status:
+            type: integer
+        description:
+            type: text
+            nullable: true
+        createdAt:
+            type: datetimetz
+            nullable: true
+        updatedAt:
+            type: datetimetz
+            nullable: true
+    lifecycleCallbacks: {  }
