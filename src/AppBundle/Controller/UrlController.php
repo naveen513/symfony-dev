@@ -28,7 +28,7 @@ class UrlController extends Controller
 
         $array_urls = [];
         foreach($urls as $url){
-            $array_urls[] = [
+            $array_urls['scenario']['steps'][] = [
                 'id' => $url->getId(),
                 'title' => $url->getTitle(),
                 'domain' => $url->getDomain(),
@@ -38,7 +38,7 @@ class UrlController extends Controller
             ];
         }
 
-        $yaml_urls = Yaml::dump($array_urls);
+        $yaml_urls = Yaml::dump($array_urls,4);
 
         return $this->render('url/export_yaml.html.twig', [
             'yaml_urls' => $yaml_urls,
