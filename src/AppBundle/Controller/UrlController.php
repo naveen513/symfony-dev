@@ -7,6 +7,7 @@ use AppBundle\Form\UrlFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Yaml\Yaml;
 
 class UrlController extends Controller
 {
@@ -17,6 +18,31 @@ class UrlController extends Controller
 
         return $this->render('url/index.html.twig', [
             'urls' => $urls,
+        ]);
+    }
+
+    public function exportYamlAction() {
+        $urls = $this->getDoctrine()
+            ->getRepository('AppBundle:Url')
+            ->findAll();
+
+        $array_urls = [];
+        foreach($urls as $url){
+            $array_urls[] = [
+                'id' => $url->getId(),
+                'title' => $url->getTitle(),
+                'domain' => $url->getDomain(),
+                'url' => $url->getUrl(),
+                'status' => $url->getStatus(),
+                'description' => $url->getDescription()
+            ];
+        }
+
+        $yaml_urls = Yaml::dump($array_urls);
+
+        return $this->render('url/export_yaml.html.twig', [
+            'yaml_urls' => $yaml_urls,
+
         ]);
     }
 

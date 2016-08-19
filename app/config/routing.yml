@@ -6,6 +6,10 @@ url_index:
     path:      /url
     defaults:  { _controller: AppBundle:Url:index }
 
+url_export_yaml:
+    path:      /url/export_yaml
+    defaults:  { _controller: AppBundle:Url:exportYaml }
+
 url_create:
     path:      /url/create
     defaults:  { _controller: AppBundle:Url:create }
