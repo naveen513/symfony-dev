@@ -28,7 +28,7 @@ class UrlController extends Controller
 
         $array_urls = [];
         foreach($urls as $url){
-            $array_urls['scenario']['steps'][] = [
+            $array_urls['scenario'][]['steps'] = [
                 'id' => $url->getId(),
                 'title' => $url->getTitle(),
                 'domain' => $url->getDomain(),
