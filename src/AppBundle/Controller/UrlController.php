@@ -28,20 +28,33 @@ class UrlController extends Controller
 
         $array_urls = [];
         foreach($urls as $url){
-            $array_urls['scenario'][]['steps'] = [
-                'id' => $url->getId(),
-                'title' => $url->getTitle(),
-                'domain' => $url->getDomain(),
-                'url' => $url->getUrl(),
-                'status' => $url->getStatus(),
-                'description' => $url->getDescription()
+            $array_urls['scenarios'][]= [
+                'options' => [
+                    'title' => $url->getTitle() ,
+                    'endpoint' => $url->getDomain()
+                ],
+                'steps' => [
+                    [
+                        'visit' => "url(\"".$url->getUrl()."\")",
+                        'follow' => "true",
+                        'expect' => [
+                            "status_code() == ".$url->getStatus(),
+                        ]
+                    ]
+                ],
+
             ];
         }
 
-        $yaml_urls = Yaml::dump($array_urls,4);
+        $yaml_urls = Yaml::dump($array_urls,7);
+
+        $base_dir = realpath($this->getParameter('kernel.root_dir').'/../');
+        $file_path = $base_dir.'/tests/scenario.yml';
+        file_put_contents($file_path, $yaml_urls);
 
         return $this->render('url/export_yaml.html.twig', [
             'yaml_urls' => $yaml_urls,
+            'file_path' => $file_path
 
         ]);
     }
