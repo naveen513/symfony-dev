@@ -82,13 +82,53 @@ class UrlController extends Controller
         ]);
     }
 
+    public function updateAction($id, Request $request) {
+        $url = $this->getDoctrine()
+            ->getRepository('AppBundle:Url')
+            ->find($id);
+
+        $form = $this->createForm(UrlFormType::class, $url);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($url);
+            $em->flush();
+
+            $this->addFlash('success', 'Url Updated');
+
+            return $this->redirectToRoute('url_index');
+        }
+
+        return $this->render('url/update.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    public function deleteAction($id, Request $request) {
+        $url = $this->getDoctrine()
+            ->getRepository('AppBundle:Url')
+            ->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($url);
+        $em->flush();
+
+        $this->addFlash('success', 'Url Deleted');
+
+        return $this->redirectToRoute('url_index');
+    }
+
     public function testAction(Request $request) {
+        $domain = $_REQUEST['domain'];
         $url = $_REQUEST['url'];
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_URL, $domain.$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+        #curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
         $output = curl_exec($ch);
         $data['status'] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
