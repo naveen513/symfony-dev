@@ -20,11 +20,6 @@ class Url
     /**
      * @var string
      */
-    private $domain;
-
-    /**
-     * @var string
-     */
     private $url;
 
     /**
@@ -80,30 +75,6 @@ class Url
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set domain
-     *
-     * @param string $domain
-     *
-     * @return Url
-     */
-    public function setDomain($domain)
-    {
-        $this->domain = $domain;
-
-        return $this;
-    }
-
-    /**
-     * Get domain
-     *
-     * @return string
-     */
-    public function getDomain()
-    {
-        return $this->domain;
     }
 
     /**

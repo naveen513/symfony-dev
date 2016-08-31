@@ -12,9 +12,6 @@ AppBundle\Entity\Url:
         title:
             type: string
             length: '255'
-        domain:
-            type: string
-            length: 255
         url:
             type: string
             length: 255

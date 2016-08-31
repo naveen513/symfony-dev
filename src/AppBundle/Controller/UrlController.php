@@ -30,8 +30,7 @@ class UrlController extends Controller
         foreach($urls as $url){
             $array_urls['scenarios'][]= [
                 'options' => [
-                    'title' => $url->getTitle() ,
-                    'endpoint' => $url->getDomain()
+                    'title' => $url->getTitle()
                 ],
                 'steps' => [
                     [
@@ -122,11 +121,10 @@ class UrlController extends Controller
     }
 
     public function testAction(Request $request) {
-        $domain = $_REQUEST['domain'];
         $url = $_REQUEST['url'];
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $domain.$url);
+        curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         #curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
         $output = curl_exec($ch);

@@ -14,7 +14,6 @@ class UrlFormType extends AbstractType
     {
         $builder
             -> add('title')
-            -> add('domain')
             -> add('url')
             -> add('status',HiddenType::class)
             -> add('statusDesc',null, array('attr'=> array('readonly'=>'readonly'), 'mapped' => false))
